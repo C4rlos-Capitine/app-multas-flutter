@@ -13,15 +13,7 @@ class dados_condutor extends StatefulWidget {
 }
 
 class _dados_condutorState extends State<dados_condutor> {
-  late Map<String, dynamic>? data;
   @override
-  void initState() {
-    // TODO: implement initState
-    data = get_info_condutor(widget.codigo) as Map<String, dynamic>?;
-    print("-------------------------");
-    print(data);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +34,7 @@ class _dados_condutorState extends State<dados_condutor> {
           ),
           body: TabBarView(
             children: [
-              aba_perfil(data),
+              aba_perfil(codigo: widget.codigo),
               aba_multas()
             ],
           ),

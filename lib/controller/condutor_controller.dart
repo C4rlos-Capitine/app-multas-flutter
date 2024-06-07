@@ -32,8 +32,8 @@ Future<bool> check_cod_condutor(String codigo) async {
 }
 
 
-Future<Map<String, dynamic>?> get_info_condutor(String codigo) async {
-  late Map<String, dynamic> data;
+Future<List?> get_info_condutor(String codigo) async {
+  late Map<String, dynamic>? data;
   try {
     var url = Uri.http('192.168.56.1', '/multas_api/api/condutor/$codigo', {'codigo': codigo});
     var response = await http.get(url);
@@ -42,9 +42,10 @@ Future<Map<String, dynamic>?> get_info_condutor(String codigo) async {
     print('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
-      data = jsonDecode(response.body);
+      data = jsonDecode(response.body) as Map<String, dynamic>?;
       print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-      return data;
+      print(data!["response"]);
+      return data!["response"] as List<dynamic>?;
     } else {
       print('Request failed with status: ${response.statusCode}');
       return null;
